@@ -1,7 +1,7 @@
 # Ignore everything
 *
 
-# But not these files...
+# Except these...
 !README.md
 !LICENCE
 !.gitignore
