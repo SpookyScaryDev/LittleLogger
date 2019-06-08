@@ -7,4 +7,9 @@
 !.gitignore
 
 !Include/
-!Include/**
+!Include/**.h
+!Include/**.cpp
+
+!Tests/
+!Tests/**.h
+!Tests/**.cpp
