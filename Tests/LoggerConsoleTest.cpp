@@ -1,73 +1,74 @@
-#include "../Include/Logger.h"
+#include "../Include/LittleLogger.h"
 #include <stdio.h>
+#include <iostream>
+#include <memory>
 
-using namespace logger;
+using namespace lilo;
 
 int main() {
 	// Tests of LogLevel based on initialisation.
 	printf("*******************************************\n");
 	printf("*Tests of LogLevel based on initialisation*\n");
 	printf("*******************************************\n");
-	printf("Creating Logger - LogFormat Console - LogLevel Message\n");
-	Logger consoleLoggerMessage(LOG_CONSOLE, LOG_MESSAGE, "", "");
+	printf("Creating ConsoleLogger - LogLevel Message\n");
+	std::shared_ptr<Logger> consoleLoggerMessage = CreateConsoleLogger(LOG_MESSAGE);
 
-	consoleLoggerMessage.logMessage("Message");
-	consoleLoggerMessage.logWarning("Warning");
-	consoleLoggerMessage.logError("Error");
+	consoleLoggerMessage->LogMessage("Message - ConsoleLogger - LogLevel Message");
+	consoleLoggerMessage->LogWarning("Warning - ConsoleLogger - LogLevel Message");
+	consoleLoggerMessage->LogError("Error - ConsoleLogger - LogLevel Message");
 	printf("\n");
 
-	printf("Creating Logger - LogFormat Console - LogLevel Warning\n");
-	Logger consoleLoggerWarning(LOG_CONSOLE, LOG_WARNING, "", "");
+	printf("Creating ConsoleLogger - LogLevel Warning\n");
+	std::shared_ptr<Logger> consoleLoggerWarning = CreateConsoleLogger(LOG_WARNING);
 
-	consoleLoggerWarning.logMessage("Message");
-	consoleLoggerWarning.logWarning("Warning");
-	consoleLoggerWarning.logError("Error");
-	printf("\n");
-
-
-	printf("Creating Logger - LogFormat Console - LogLevel Error\n");
-	Logger consoleLoggerError(LOG_CONSOLE, LOG_ERROR, "", "");
-
-	consoleLoggerError.logMessage("Message");
-	consoleLoggerError.logWarning("Warning");
-	consoleLoggerError.logError("Error");
+	consoleLoggerWarning->LogMessage("Message - ConsoleLogger - LogLevel Warning");
+	consoleLoggerWarning->LogWarning("Warning - ConsoleLogger - LogLevel Warning");
+	consoleLoggerWarning->LogError("Error - ConsoleLogger - LogLevel Warning");
 	printf("\n");
 
 
-	// Tests of LogLevel based on SetFormat().
+	printf("Creating ConsoleLogger Console - LogLevel Error\n");
+	std::shared_ptr<Logger> consoleLoggerError = CreateConsoleLogger(LOG_ERROR);
+
+	consoleLoggerError->LogMessage("Message - ConsoleLogger - LogLevel Error");
+	consoleLoggerError->LogWarning("Warning - ConsoleLogger - LogLevel Error");
+	consoleLoggerError->LogError("Error - ConsoleLogger - LogLevel Error");
+	printf("\n");
+
+
+	// Tests of LogLevel based on SetLevel().
 	printf("****************************************\n");
-	printf("*Tests of LogLevel based on SetFormat()*\n");
+	printf("*Tests of LogLevel based on SetLevel()*\n");
 	printf("****************************************\n");
-	printf("Creating Logger - LogFormat Console - LogLevel Message\n");
-	Logger consoleLoggerMessage2(LOG_CONSOLE, LOG_MESSAGE, "", "");
+	printf("Creating ConsoleLogger\n");
+	std::shared_ptr<Logger> consoleLoggerMessage2 = CreateConsoleLogger();
 	printf("Setting LogLevel to Message\n");
-	consoleLoggerMessage2.setLevel(LOG_MESSAGE);
+	consoleLoggerMessage2->SetLevel(LOG_MESSAGE);
 
-
-	consoleLoggerMessage.logMessage("Message");
-	consoleLoggerMessage.logWarning("Warning");
-	consoleLoggerMessage.logError("Error");
+	consoleLoggerMessage2->LogMessage("Message - ConsoleLogger - LogLevel Message");
+	consoleLoggerMessage2->LogWarning("Warning - ConsoleLogger - LogLevel Message");
+	consoleLoggerMessage2->LogError("Error - ConsoleLogger - LogLevel Message");
 	printf("\n");
 
-	printf("Creating Logger - LogFormat Console - LogLevel Message\n");
-	Logger consoleLoggerWarning2(LOG_CONSOLE, LOG_MESSAGE, "", "");
+	printf("Creating ConsoleLogger\n");
+	std::shared_ptr<Logger> consoleLoggerWarning2 = CreateConsoleLogger();
 	printf("Setting LogLevel to Warning\n");
-	consoleLoggerWarning2.setLevel(LOG_WARNING);
+	consoleLoggerWarning2->SetLevel(LOG_WARNING);
 
-	consoleLoggerWarning.logMessage("Message");
-	consoleLoggerWarning.logWarning("Warning");
-	consoleLoggerWarning.logError("Error");
+	consoleLoggerWarning2->LogMessage("Message - ConsoleLogger - LogLevel Warning");
+	consoleLoggerWarning2->LogWarning("Warning - ConsoleLogger - LogLevel Warning");
+	consoleLoggerWarning2->LogError("Error - ConsoleLogger - LogLevel Warning");
 	printf("\n");
 
 
-	printf("Creating Logger - LogFormat Console - LogLevel Message\n");
-	Logger consoleLoggerError2(LOG_CONSOLE, LOG_MESSAGE, "", "");
+	printf("Creating ConsoleLogger\n");
+	std::shared_ptr<Logger> consoleLoggerError2 = CreateConsoleLogger();
 	printf("Setting LogLevel to Error\n");
-	consoleLoggerError2.setLevel(LOG_ERROR);
+	consoleLoggerError2->SetLevel(LOG_ERROR);
 
-	consoleLoggerError.logMessage("Message");
-	consoleLoggerError.logWarning("Warning");
-	consoleLoggerError.logError("Error");
+	consoleLoggerError2->LogMessage("Message - ConsoleLogger - LogLevel Error");
+	consoleLoggerError2->LogWarning("Warning - ConsoleLogger - LogLevel Error");
+	consoleLoggerError2->LogError("Error - ConsoleLogger - LogLevel Error");
 	printf("\n");
 
 	std::cin.get();

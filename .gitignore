@@ -1,15 +1,9 @@
-# Ignore everything
-*
+# Directories
+.vs/
+Binaries/
+Build/
+Intermediate/
 
-# Except these...
-!README.md
-!LICENCE
-!.gitignore
-
-!Include/
-!Include/**.h
-!Include/**.cpp
-
-!Tests/
-!Tests/**.h
-!Tests/**.cpp
+# Files
+GenerateProjectFiles.bat
+LoggerTests.sln

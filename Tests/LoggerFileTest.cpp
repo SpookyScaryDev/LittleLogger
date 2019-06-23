@@ -1,80 +1,84 @@
-#include "../Include/Logger.h"
+#include "../Include/LittleLogger.h"
 #include <stdio.h>
+#include <iostream>
+#include <memory>
 
-using namespace logger;
+using namespace lilo;
 
 int main() {
 	// Tests of LogLevel based on initialisation.
 	printf("*******************************************\n");
 	printf("*Tests of LogLevel based on initialisation*\n");
 	printf("*******************************************\n");
-	printf("Creating Logger - LogFormat File - LogLevel Message\n");
-	Logger consoleLoggerMessage(LOG_FILE, LOG_MESSAGE, "LoggerFileTest", "LoggerFileTest");
-	consoleLoggerMessage.setFile("LoggerFileTest", "LoggerFileTest"); // Emr...
+	printf("Creating FileLogger - LogLevel Message\n");
+	std::shared_ptr<Logger> fileLoggerMessage = CreateFileLogger(LOG_MESSAGE, "LogFileTest.log.txt");
 
-	consoleLoggerMessage.logMessage("Message");
-	consoleLoggerMessage.logWarning("Warning");
-	consoleLoggerMessage.logError("Error");
+	fileLoggerMessage->LogMessage("Message - FileLogger - LogLevel Message");
+	fileLoggerMessage->LogWarning("Warning - FileLogger - LogLevel Message");
+	fileLoggerMessage->LogError("Error - FileLogger - LogLevel Message");
 	printf("\n");
 
-	printf("Creating Logger - LogFormat File - LogLevel Warning\n");
-	Logger consoleLoggerWarning(LOG_FILE, LOG_WARNING, "LoggerFileTest", "LoggerFileTest");
-	consoleLoggerWarning.setFile("LoggerFileTest", "LoggerFileTest"); // Emr...
+	fileLoggerMessage.reset();
 
-	consoleLoggerWarning.logMessage("Message");
-	consoleLoggerWarning.logWarning("Warning");
-	consoleLoggerWarning.logError("Error");
+	printf("Creating FileLogger - LogLevel Warning\n");
+	std::shared_ptr<Logger> fileLoggerWarning = CreateFileLogger(LOG_WARNING, "LogFileTest.log.txt");
+
+	fileLoggerWarning->LogMessage("Message - FileLogger - LogLevel Warning");
+	fileLoggerWarning->LogWarning("Warning - FileLogger - LogLevel Warning");
+	fileLoggerWarning->LogError("Error - FileLogger - LogLevel Warning");
 	printf("\n");
 
+	fileLoggerWarning.reset();
 
-	printf("Creating Logger - LogFormat File - LogLevel Error\n");
-	Logger consoleLoggerError(LOG_FILE, LOG_ERROR, "LoggerFileTest", "LoggerFileTest");
-	consoleLoggerError.setFile("LoggerFileTest", "LoggerFileTest"); // Emr...
+	printf("Creating FileLogger Console - LogLevel Error\n");
+	std::shared_ptr<Logger> fileLoggerError = CreateFileLogger(LOG_ERROR, "LogFileTest.log.txt");
 
-	consoleLoggerError.logMessage("Message");
-	consoleLoggerError.logWarning("Warning");
-	consoleLoggerError.logError("Error");
+	fileLoggerError->LogMessage("Message - FileLogger - LogLevel Error");
+	fileLoggerError->LogWarning("Warning - FileLogger - LogLevel Error");
+	fileLoggerError->LogError("Error - FileLogger - LogLevel Error");
 	printf("\n");
 
+	fileLoggerError.reset();
 
-	// Tests of LogLevel based on SetFormat().
+	// Tests of LogLevel based on SetLevel().
 	printf("****************************************\n");
-	printf("*Tests of LogLevel based on SetFormat()*\n");
+	printf("*Tests of LogLevel based on SetLevel()*\n");
 	printf("****************************************\n");
-	printf("Creating Logger - LogFormat File - LogLevel Message\n");
-	Logger consoleLoggerMessage2(LOG_FILE, LOG_MESSAGE, "LoggerFileTest", "LoggerFileTest");
-	consoleLoggerMessage2.setFile("LoggerFileTest", "LoggerFileTest"); // Emr...
+	printf("Creating FileLogger\n");
+	std::shared_ptr<Logger> fileLoggerMessage2 = CreateFileLogger("LogFileTest.log.txt");
 	printf("Setting LogLevel to Message\n");
-	consoleLoggerMessage2.setLevel(LOG_MESSAGE);
+	fileLoggerMessage2->SetLevel(LOG_MESSAGE);
 
-
-	consoleLoggerMessage.logMessage("Message");
-	consoleLoggerMessage.logWarning("Warning");
-	consoleLoggerMessage.logError("Error");
+	fileLoggerMessage2->LogMessage("Message - FileLogger - LogLevel Message");
+	fileLoggerMessage2->LogWarning("Warning - FileLogger - LogLevel Message");
+	fileLoggerMessage2->LogError("Error - FileLogger - LogLevel Message");
 	printf("\n");
 
-	printf("Creating Logger - LogFormat File - LogLevel Message\n");
-	Logger consoleLoggerWarning2(LOG_FILE, LOG_MESSAGE, "LoggerFileTest", "LoggerFileTest");
-	consoleLoggerWarning2.setFile("LoggerFileTest", "LoggerFileTest"); // Emr...
+	fileLoggerMessage2.reset();
+
+	printf("Creating FileLogger\n");
+	std::shared_ptr<Logger> fileLoggerWarning2 = CreateFileLogger("LogFileTest.log.txt");
 	printf("Setting LogLevel to Warning\n");
-	consoleLoggerWarning2.setLevel(LOG_WARNING);
+	fileLoggerWarning2->SetLevel(LOG_WARNING);
 
-	consoleLoggerWarning.logMessage("Message");
-	consoleLoggerWarning.logWarning("Warning");
-	consoleLoggerWarning.logError("Error");
+	fileLoggerWarning2->LogMessage("Message - FileLogger - LogLevel Warning");
+	fileLoggerWarning2->LogWarning("Warning - FileLogger - LogLevel Warning");
+	fileLoggerWarning2->LogError("Error - FileLogger - LogLevel Warning");
 	printf("\n");
 
+	fileLoggerWarning2.reset();
 
-	printf("Creating Logger - LogFormat File - LogLevel Message\n");
-	Logger consoleLoggerError2(LOG_FILE, LOG_MESSAGE, "LoggerFileTest", "LoggerFileTest");
-	consoleLoggerError2.setFile("LoggerFileTest", "LoggerFileTest"); // Emr...
+	printf("Creating FileLogger\n");
+	std::shared_ptr<Logger> fileLoggerError2 = CreateFileLogger("LogFileTest.log.txt");
 	printf("Setting LogLevel to Error\n");
-	consoleLoggerError2.setLevel(LOG_ERROR);
+	fileLoggerError2->SetLevel(LOG_ERROR);
 
-	consoleLoggerError.logMessage("Message");
-	consoleLoggerError.logWarning("Warning");
-	consoleLoggerError.logError("Error");
+	fileLoggerError2->LogMessage("Message - FileLogger - LogLevel Error");
+	fileLoggerError2->LogWarning("Warning - FileLogger - LogLevel Error");
+	fileLoggerError2->LogError("Error - FileLogger - LogLevel Error");
 	printf("\n");
+
+	fileLoggerError2.reset();
 
 	std::cin.get();
 	return 0;
